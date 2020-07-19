@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:text="Jack's Paper Scissors Rock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:id="@+id/txtvTitle"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:backgroundTint="#fffcb22d"
+        android:shadowDx="12"
+        android:shadowDy="12"
+        android:shadowRadius="12"
+        android:padding="10dp"
+        android:textSize="24dp"
+        android:typeface="serif" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxtEnterName"
+        android:textColor="#ff000000"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:padding="10dp"
+        android:hint="Your Name..." />
+</LinearLayout>  
