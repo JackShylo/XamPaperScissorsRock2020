@@ -4,15 +4,17 @@ using Android.Support.V7.App;
 using Android.Runtime;
 using Android.Widget;
 using System;
+using System.Linq;
 
 namespace XamPaperScissorsRock2020
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "@string/app_name")]
     public class MainActivity : AppCompatActivity
     {
-        ImageView GamePic;
         TextView txtMainMsg;
+        ImageView imgResult;
         Button btnPlay;
+        TextView txtWelcomeMsg;
         string Human, Name, NPC;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -20,16 +22,18 @@ namespace XamPaperScissorsRock2020
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.activity_main);
+            SetContentView(Resource.Layout.Game);
 
+            Name = Intent.GetStringExtra("Name");
             Init();
         }
 
         void Init()
         {
             txtMainMsg = FindViewById<TextView>(Resource.Id.txtMainMsg);
-            GamePic = FindViewById<ImageView>(Resource.Id.imgAnswer);
+            imgResult = FindViewById<ImageView>(Resource.Id.imgResult);
             btnPlay = FindViewById<Button>(Resource.Id.btnPlay);
+            txtWelcomeMsg = FindViewById<TextView>(Resource.Id.txtWelcomeMsg);
 
             RadioButton rbnPaper = FindViewById<RadioButton>(Resource.Id.rbnPaper);
             RadioButton rbnScissors = FindViewById<RadioButton>(Resource.Id.rbnScissors);
@@ -39,6 +43,8 @@ namespace XamPaperScissorsRock2020
             rbnScissors.Click += Rbn_Click;
             rbnRock.Click += Rbn_Click;
 
+            txtWelcomeMsg.Text = $"Welcome {Name}!";
+
             btnPlay.Click += btnPlay_Click;
         }
 
@@ -47,24 +53,29 @@ namespace XamPaperScissorsRock2020
             string NPC = Gameplay.ComputerChoice();
             string Result = Gameplay.Play(Human, NPC);
 
-            txtMainMsg.Text = $"{Result}, NPC chose {NPC} while you chose {Human}!";
+            switch (Result)
+            {
+                case "Win":
+                    txtMainMsg.Text = $"You {Result}, NPC chose {NPC} while you chose {Human}!";
+                    imgResult.SetImageResource(Resource.Drawable.Win);
+                    break;
+                case "Lose":
+                    txtMainMsg.Text = $"You {Result}, NPC chose {NPC} while you chose {Human}!";
+                    imgResult.SetImageResource(Resource.Drawable.Lose);
+                    break;
+                case "Draw":
+                    txtMainMsg.Text = $"It's a {Result}, NPC chose {NPC} while you chose {Human}!";
+                    imgResult.SetImageResource(Resource.Drawable.Draw);
+                    break;
+            }
         }
 
         private void Rbn_Click(object sender, EventArgs e)
         {
             RadioButton tempRB = (RadioButton)sender;
 
-            Human = tempRB.Text;
+            Human = (tempRB.Text);
             txtMainMsg.Text = $"{Name}, You chose {Human}";
-
-            throw new NotImplementedException();
-        }
-
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

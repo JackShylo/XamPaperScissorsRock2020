@@ -18,7 +18,7 @@ namespace XamPaperScissorsRock2020
         {
             // Returns either Paper, Scissors or Rock (Random)
             Random myRandom = new Random();
-            string[] Guess = { "", "Paper", "Scissors", "Rock" };
+            string[] Guess = { "", "PAPER", "SCISSORS", "ROCK" };
             return Guess[myRandom.Next(1, 4)];
         }
 
@@ -30,47 +30,44 @@ namespace XamPaperScissorsRock2020
                 return "Draw";
             }
             // Winning Logic
-            else if (Human == "Paper")
+            else if (Human == "PAPER")
             {
-                if (Comp == "Scissors")
+                if (Comp == "SCISSORS")
                 {
-                    return "Comp Win";
+                    return "Lose";
                 }
 
-                else if (Comp == "Rock")
+                else if (Comp == "ROCK")
                 {
-                    return "Human Wins";
+                    return "Win";
                 }
             }
-            else if (Human == "Scissors")
+            else if (Human == "SCISSORS")
             {
-                if (Comp == "Rock")
+                if (Comp == "ROCK")
                 {
-                    return "Comp Win";
+                    return "Lose";
                 }
 
-                else if (Comp == "Paper")
+                else if (Comp == "PAPER")
                 {
-                    return "Human Wins";
+                    return "Wins";
                 }
             }
-            else if (Human == "Rock")
+            else if (Human == "ROCK")
             {
-                if (Comp == "Paper")
+                if (Comp == "PAPER")
                 {
-                    return "Comp Win";
+                    return "Lose";
                 }
 
-                else if (Comp == "Scissors")
+                else if (Comp == "SCISSORS")
                 {
-                    return "Human Wins";
+                    return "Win";
                 }
             }
-            else
-            {
-                return "";
-            }
 
+            return "";
         }
     }
 }
